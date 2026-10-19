@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>여래사 | YeoLaiSah Buddhist Temple</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-cream: #faf8f5;
+      --surface: #ffffff;
+      --text-main: #2b2b2b;
+      --text-muted: #6b6b6b;
+      --accent-gold: #b38a43;
+      --accent-hover: #967232;
+      --border: #e8e4dc;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: var(--bg-cream);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* Header & Navigation */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--text-main);
+    }
+    .logo span {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+    nav ul {
+      display: flex;
+      gap: 1.25rem;
+      list-style: none;
+      align-items: center;
+    }
+    nav a {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-main);
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--accent-gold); }
+    .btn-yt {
+      background: #ff0000;
+      color: #fff !important;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.8rem !important;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 4.5rem 1.5rem;
+      background: linear-gradient(180deg, #f3ede2 0%, var(--bg-cream) 100%);
+    }
+    .hero h1 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+    .hero p.en-sub { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+
+    /* Sections */
+    .container { max-width: 1100px; margin: auto; padding: 3rem 1.5rem; }
+    .section-title {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .section-title h2 { font-size: 1.8rem; }
+    .section-title p { color: var(--text-muted); font-size: 0.95rem; }
+
+    /* Service Cards */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+    }
+    .card h3 { color: var(--accent-gold); margin-bottom: 0.5rem; }
+    .btn-primary {
+      display: inline-block;
+      margin-top: 1.2rem;
+      background: var(--accent-gold);
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent-hover); }
+
+    /* Gallery Grid */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+    .gallery-item {
+      background: #e2ddd5;
+      border-radius: 6px;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s;
+    }
+    .gallery-item img:hover { transform: scale(1.03); }
+
+    /* Map & Contact */
+    .map-frame {
+      width: 100%;
+      height: 320px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    /* Footer */
+    footer {
+      background: #242220;
+      color: #ccc;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+    footer a { color: var(--accent-gold); }
+
+    /* Popup Modal */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.65);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .modal-box {
+      background: var(--surface);
+      max-width: 480px;
+      width: 100%;
+      padding: 2rem;
+      border-radius: 8px;
+      position: relative;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 15px;
+      font-size: 1.5rem;
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Popup Notice Window -->
+  <div id="noticeModal" class="modal-backdrop">
+    <div class="modal-box">
+      <button class="close-btn" onclick="closePopup()">&times;</button>
+      <h3 style="color: var(--accent-gold); margin-bottom: 0.5rem;">일요 정기법회 안내</h3>
+      <h4 style="color: var(--text-muted); margin-bottom: 1rem;">Sunday Dharma Service</h4>
+      <p style="margin-bottom: 0.75rem;">매주 일요일 오전 11시에 여래사 대면 법회 및 유튜브 실시간 방송이 봉행됩니다.</p>
+      <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+        <em>Join us in person or live on YouTube every Sunday at 11:00 AM.</em>
+      </p>
+      <a href="https://www.youtube.com/@YeoLaiSah" target="_blank" class="btn-primary" style="display:block; text-align:center;">
+        유튜브 생방송 참여 | Watch Live
+      </a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo">
+        대한불교조계종 여래사
+        <span>YeoLaiSah Buddhist Temple</span>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="#services">법회 | Services</a></li>
+          <li><a href="#gallery">앨범 | Gallery</a></li>
+          <li><a href="#contact">오시는길 | Visit</a></li>
+          <li><a href="https://www.youtube.com/@YeoLaiSah" target="_blank" class="btn-yt">YouTube</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>마음의 평화와 지혜를 찾는 도량</h1>
+    <p class="en-sub">A Sanctuary for Mindfulness, Peace, and Awakening</p>
+  </section>
+
+  <!-- Schedule & YouTube -->
+  <section id="services" class="container">
+    <div class="section-title">
+      <h2>정기 법회 안내</h2>
+      <p>Regular Practice & Dharma Services</p>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <h3>일요 정기법회 | Sunday Service</h3>
+        <p><strong>시간:</strong> 매주 일요일 오전 11:00</p>
+        <p><strong>Time:</strong> Every Sunday at 11:00 AM</p>
+        <p style="margin-top: 0.75rem; color: var(--text-muted);">
+          예불, 주지스님 법문, 명상 및 사찰 공양<br>
+          <em>Chanting, Dharma Talk, Meditation, & Community Lunch</em>
+        </p>
+        <a href="https://www.youtube.com/@YeoLaiSah" target="_blank" class="btn-primary">
+          유튜브 실시간 방송 | YouTube Live
+        </a>
+      </div>
+      <div class="card">
+        <h3>온라인 법문 다시보기</h3>
+        <p style="color: var(--text-muted); margin-bottom: 1rem;">
+          지난 법회와 스님의 법문 영상을 공식 유튜브 채널에서 다시 시청하실 수 있습니다.
+        </p>
+        <a href="https://www.youtube.com/@YeoLaiSah" target="_blank" style="font-weight: 600; color: #ff0000;">
+          ▶ @YeoLaiSah 채널 바로가기
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery" class="container" style="border-top: 1px solid var(--border);">
+    <div class="section-title">
+      <h2>행사 앨범</h2>
+      <p>Photo Gallery & Community Events</p>
+    </div>
+    <div class="gallery-grid">
+      <!-- Replace placeholder image URLs with actual photos -->
+      <div class="gallery-item"><img src="https://picsum.photos/600/450?random=1" alt="사찰 사진"></div>
+      <div class="gallery-item"><img src="https://picsum.photos/600/450?random=2" alt="사찰 사진"></div>
+      <div class="gallery-item"><img src="https://picsum.photos/600/450?random=3" alt="사찰 사진"></div>
+      <div class="gallery-item"><img src="https://picsum.photos/600/450?random=4" alt="사찰 사진"></div>
+    </div>
+  </section>
+
+  <!-- Location & Contact -->
+  <section id="contact" class="container" style="border-top: 1px solid var(--border);">
+    <div class="section-title">
+      <h2>오시는 길 & 연락처</h2>
+      <p>Directions & Contact Information</p>
+    </div>
+    <div class="grid-2">
+      <div>
+        <p style="font-size: 1.1rem; font-weight: 600;">대한불교조계종 여래사</p>
+        <p style="margin-top: 0.5rem;">
+          <strong>주소 (Address):</strong><br>
+          200 San Bruno Ave W, San Bruno, CA 94066
+        </p>
+        <p style="margin-top: 0.5rem;">
+          <strong>전화 (Phone):</strong><br>
+          <a href="tel:16505888449" style="color: var(--accent-gold);">(650) 588-8449</a>
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">
+          * San Bruno Caltrain 역 도보 3분 거리<br>
+          * Approx. 3-minute walk from San Bruno Caltrain Station
+        </p>
+      </div>
+      <div>
+        <!-- Embedded Google Map -->
+        <iframe 
+          class="map-frame"
+          src="https://maps.google.com/maps?q=200%20San%20Bruno%20Ave%20W,%20San%20Bruno,%20CA%2094066&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 대한불교조계종 여래사 (YeoLaiSah). All rights reserved.</p>
+    <p style="margin-top: 0.3rem;">200 San Bruno Ave W, San Bruno, CA 94066 | (650) 588-8449</p>
+  </footer>
+
+  <!-- Script for Notice Popup -->
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      // Shows modal after 1.5 seconds if not closed in this session
+      if (!sessionStorage.getItem('noticeClosed')) {
+        setTimeout(() => {
+          document.getElementById('noticeModal').style.display = 'flex';
+        }, 1500);
+      }
+    });
+
+    function closePopup() {
+      document.getElementById('noticeModal').style.display = 'none';
+      sessionStorage.setItem('noticeClosed', 'true');
+    }
+  </script>
+</body>
+</html>
